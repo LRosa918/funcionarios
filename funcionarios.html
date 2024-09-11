@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POO</title>
+</head>
+<body>
+    <script>
+        // Classe base Funcionário
+        class Funcionario {
+            constructor(nome, cargo) {
+                this.nome = nome;
+                this.cargo = cargo;
+                this.atividades = [];
+            }
+
+            addAtv(atividade) {
+                this.atividades.push(atividade);
+            }
+
+            listAtv() {
+                console.log(`Atividades de ${this.nome} (${this.cargo}):`);
+                this.atividades.forEach((atividade, index) => {
+                    console.log(`${index + 1}. ${atividade}`);
+                });
+            }
+        }
+
+        // Classe Engenheiro que herda de Funcionario
+        class Engenheiro extends Funcionario {
+            constructor(nome) {
+                super(nome, 'Engenheiro');
+            }
+
+            realizarTeste() {
+                console.log(`${this.nome} está realizando testes.`);
+            }
+        }
+
+        // Classe Designer que herda de Funcionario
+        class Designer extends Funcionario {
+            constructor(nome) {
+                super(nome, 'Designer');
+            }
+
+            criarDesign() {
+                console.log(`${this.nome} está criando um design.`);
+            }
+        }
+
+        // Classe Gerente que tem um método para gerenciar funcionários
+        class Gerente {
+            constructor(nome) {
+                this.nome = nome;
+                this.funcionarios = [];
+            }
+
+            addFuncionario(funcionario) {
+                this.funcionarios.push(funcionario);
+                console.log(`${funcionario.nome} foi adicionado ao time.`);
+            }
+
+            listFuncionarios() {
+                console.log(`Funcionários sob a supervisão de ${this.nome}:`);
+                this.funcionarios.forEach(func => console.log(`- ${func.nome} (${func.cargo})`));
+            }
+        }
+
+        // Uso do sistema
+        // Cria gerentes, engenheiros e designers, atribuindo a eles suas atividades
+        const gerente = new Gerente('Carlos');
+
+        const engenheiro1 = new Engenheiro('Ana');
+        engenheiro1.addAtv('Construir protótipo de software');
+        engenheiro1.addAtv('Participar de reuniões de equipe');
+
+        const designer1 = new Designer('Pedro');
+        designer1.addAtv('Criar wireframes');
+        designer1.addAtv('Desenvolver identidade visual');
+
+        // Adicionando os funcionários ao gerente e listando os funcionários do time
+        gerente.addFuncionario(engenheiro1);
+        gerente.addFuncionario(designer1);
+
+        gerente.listFuncionarios();
+        engenheiro1.listAtv();
+        designer1.listAtv();
+
+        // Realizando algumas atividades específicas
+        engenheiro1.realizarTeste();
+        designer1.criarDesign();
+
+    </script>
+</body>
+</html>
